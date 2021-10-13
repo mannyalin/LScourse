@@ -1,0 +1,32 @@
+{
+  "en" : {
+    "welcome" : "Welcome to Calculator!",
+    "number1" : "What is the first number?",
+    "invalidNumber": "Sorry, that is not a number, please provide first number",
+    "number2" : "What is the second number?" ,
+    "operation" : "What operation should be performed?\n1) Add 2) Subract 3) Multiply 4) Divide",
+    "invalidOperation" : "You can only choose an operation from 1 to 4, please select from 1 to 4",
+    "startAgain" : "Would you like to perform another calculation? (y/n)",
+    "goodbye" : "Have a nice day! Good-Bye!"
+  },
+  "es" : {
+    "welcome" : "Bienvenida a la calculadora!",
+    "number1" : "Cual es el primer numero?",
+    "invalidNumber": "Lo sentimos, ese no es un número, proporcione el primer número",
+    "number2" : "Cual es el segundo numero?" ,
+    "operation" : "¿Qué operación se debe realizar?\n1) Sumar 2) Restar 3) Multiplicar 4) Dividir",
+    "invalidOperation" : "Solo puede elegir una operación de 1 a 4, seleccione de 1 a 4.",
+    "startAgain" : "¿Le gustaría realizar otro cálculo? (y / n)",
+    "goodbye" : "¡Que tenga un lindo día! ¡Adiós!"
+  },
+  "fr" : {
+    "welcome" : "Bienvenue dans la calculatrice !",
+    "number1" : "Quel est le premier nombre ?",
+    "invalidNumber": "Désolé, ce n'est pas un numéro, veuillez fournir le premier numéro.",
+    "number2" : "Quel est le deuxième nombre ??" ,
+    "operation" : "What operation should be performed?\n1) Add 2) Subract 3) Multiply 4) Divide",
+    "invalidOperation" : "Quelle opération doit être effectuée ?\n1) Ajouter 2) Soustraire 3) Multiplier 4) Diviser",
+    "startAgain" : "Souhaitez-vous effectuer un autre calcul ? (y/n)",
+    "goodbye" : "Bonne journée! Au revoir!"
+  }
+}
