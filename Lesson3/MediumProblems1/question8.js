@@ -28,5 +28,3 @@ messWithDemographics(munsters);
 
 // Before Grandpa could stop him, Spot hit the Enter key with his tail. Did the family's data get ransacked? Why or why not?
 
-// It is ransacked because forEach does not return a new array. It will mutate its caller. Also the family member holds an object. This will be passed as a reference, and mutating the object will have the same pointers to the same object. Once the object is changed, it is changed everywhere. 
-
