@@ -9,3 +9,17 @@ let arr3 = [['abc'], ['def'], { third: ['ghi'] }];
 let obj1 = { a: ['d', 'e'], b: ['f', 'g'], c: ['h', 'i'] };
 
 let obj2 = { first: { d: 3 }, second: { e: 2, f: 1 }, third: { g: 0 }}
+
+// => 'g'
+arr1[2][1][[3]];
+
+arr2[1]['third'][0];
+arr2[1].third[0];
+
+arr3[2]['third'][0][0];
+arr3[2].third[0][0];
+
+obj1.b[1];
+obj1['b'][1];
+
+Object.keys(obj2.third)[0]
