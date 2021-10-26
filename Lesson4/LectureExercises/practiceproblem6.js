@@ -13,3 +13,4 @@ let munsters = {
 for(let member in munsters) {
   console.log(`${member} is a ${munsters[member]['age']}-year-old ${munsters[member]['gender']}`)
 }
+
