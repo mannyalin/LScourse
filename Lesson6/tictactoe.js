@@ -42,11 +42,27 @@ function emptySquares(board) {
   return Object.keys(board).filter(key => board[key] === ' ');
 }
 
+function joinOr(arr, delimeter = ', ', lastDelimeter = 'or ') {
+  let emptyChoices = '';
+  for (let i = 0; i <= arr.length -2; i++) {
+    emptyChoices += arr[i] + delimeter;
+  }
+  if (arr.length === 0) {
+    return '';
+  } else if (arr.length === 1) {
+    return arr[0];
+  } else if (arr.length === 2) {
+    return `${arr[0]} ${lastDelimeter} ${arr[1]}`;
+  } else {
+    emptyChoices + lastDelimeter + arr[arr.length - 1];
+  }
+}
+ 
 function playerChoosesSquare(board) {
   let square;
     
   while (true) {
-    prompt(`Choose a square (${emptySquares(board).join(', ')}):`);
+    prompt(`Choose a square: ${joinOr(emptySquares(board))}):`);
     square = readline.question().trim();
     
     if (emptySquares(board).includes(square)) break;
