@@ -116,12 +116,12 @@ function computerChoosesSquare(board) {
       }     
     
       if (board['5'] === ' ' ) {
-        return board['5'] = COMPUTER_MARKER;
-      } 
+        board['5'] = COMPUTER_MARKER;
+      } else {
         let randomIndex = Math.floor(Math.random() * emptySquares.length);
         let square = emptySquares(board)[randomIndex]
-        return board[square] = COMPUTER_MARKER;  
-
+        board[square] = COMPUTER_MARKER;  
+      }
 }
 
 function boardFull(board) {
@@ -170,9 +170,8 @@ while (true) {
       computerChoosesSquare(board);
       if (someoneWon(board) || boardFull(board)) break;  
     }
-    
     displayBoard(board);
-    
+
     if (someoneWon(board)) {
       prompt(`${detectWinner(board)} earns a point!`);
       detectWinner(board) === 'Player' ? playerScore += 1 : computerScore +=1;
@@ -180,13 +179,24 @@ while (true) {
       prompt("It's a tie!");
     }
     console.log(`Player : ${playerScore}\nComputer : ${computerScore}`)
+
+    prompt(`Ready for next round?`)
+    let nextRound = readline.question().toLowerCase().trim();
+    if (nextRound === 'n') break;
   
-    prompt('Play again? (y or n)');
-    let answer = readline.question().toLowerCase()[0]
-    if (answer !== 'y') break;
+    if (playerScore === WINSCORE || computerScore === WINSCORE) break;
+
+  }
+  console.log(playerScore === WINSCORE ? 'Player Won!' : 'Computer Won!')
+
+  prompt('Play again? (Y or N)');
+  let answer = readline.question().toLowerCase().trim();
+  while (!(answer === 'y' || answer === 'n')) {
+    prompt(`That is not a valid choice, Choose only Y or N`);
+    answer = readline.question().toLowerCase().trim();
   }
 
-  if(playerScore === WINSCORE || computerScore === WINSCORE) break;
+  if (answer === 'n') break;
 }
 
 prompt('Thanks for playing Tic Tac Toe!')
