@@ -1,28 +1,26 @@
-// Initialize the Deck
-// Deal cards to Player and Dealer
-// Player turn: Hit or Stay
-//  -If player bust, dealer wins
-// Dealer turn: hit until >= 17
-//  -If dealer bust, player wins
-// Compare hands and declare winner.
-const TARGETTOTAL = 21;
 let readline = require('readline-sync');
-let totalPerSuit = 13;
+const TARGETTOTAL = 21;
+const EACHSUITAMOUNT = 13;
+const MINVALUE = 17;
+const SUIT = ['H', 'D', 'S', 'C'];
+
 let deck = [];
 let playerHand;
 let computerHand;
 let again;
-// eslint-disable-next-line max-lines-per-function
+
+deck = initializeDeck();
+shuffle(deck);
+deal(deck);
+
 function prompt(message) {
   console.log(`==> ${message}`);
 }
+// eslint-disable-next-line max-lines-per-function
 function initializeDeck() {
-  let deck = [];
-  for (let cardNumber = 1; cardNumber <= totalPerSuit; cardNumber += 1) {
-    // eslint-disable-next-line semi
-    let suit = ['H', 'D', 'S', 'C']
-    for (let idx = 0; idx < suit.length; idx += 1) {
-      deck.push([String(cardNumber), suit[idx]]);
+  for (let cardNumber = 1; cardNumber <= EACHSUITAMOUNT; cardNumber += 1) {
+    for (let idx = 0; idx < SUIT.length; idx += 1) {
+      deck.push([String(cardNumber), SUIT[idx]]);
     }
   }
   deck.forEach(card => {
@@ -42,7 +40,6 @@ function initializeDeck() {
   return deck;
 }
 
-
 function shuffle(arr) {
   for (let index = arr.length - 1; index > 0; index -= 1) {
     let otherIndex = Math.floor(Math.random() * (index + 1));
@@ -50,21 +47,15 @@ function shuffle(arr) {
   }
 }
 
-function randomCard(amountInDeck) {
-  return Math.floor(Math.random() * amountInDeck);
+function randomIndex(maxRange = deck.length) {
+  return Math.floor(Math.random() * maxRange);
 }
-function deal(deck) {
-  playerHand = deck.splice(deck[randomCard(deck.length)], 2);
-  computerHand = deck.splice(deck[randomCard(deck.length)], 2);
-  console.log(playerHand);
-  console.log(computerHand[0]);
-}
+
 
 function total(cards) {
-  // cards = [['H', '3'], ['S', 'Q'], ... ]
   let values = cards.map(card => card[0]);
-
   let sum = 0;
+  
   values.forEach(value => {
     if (value === "A") {
       sum += 11;
@@ -74,28 +65,39 @@ function total(cards) {
       sum += Number(value);
     }
   });
-
   // correct for Aces
   values.filter(value => value === "A").forEach(_ => {
     if (sum > 21) sum -= 10;
   });
   return sum;
 }
+function deal(deck) {
+  playerHand = deck.splice(randomIndex(), 2);
+  computerHand = deck.splice(randomIndex(), 2);
+  // playerHand.push(deck.splice(deck[randomIndex()], 1).flat());
+  // computerHand.push(deck.splice(deck[randomIndex()], 1).flat());
+  console.log(`You have ${playerHand.join(' and ')} for a total of ${total(playerHand)}`);
+  console.log(`Computer shows ${computerHand[0]}`);
+}
 
 function busted(playerOrCompCards) {
   return total(playerOrCompCards) > TARGETTOTAL;
 }
+
+
+let playerTotal = total(playerHand);
+let computerTotal = total(computerHand);
 
 function determineWinner() {
   if (!busted(playerHand) && busted(computerHand)) {
     prompt('Player Won!');
   } else if (busted(playerHand) && !busted(computerHand)) {
     prompt('Computer Won!');
-  } else if (total(playerHand) > total(computerHand)) {
+  } else if (playerTotal > computerTotal) {
     prompt('Player Won!');
-  } else if (total(computerHand) > total(playerHand)) {
+  } else if (computerTotal > playerTotal) {
     prompt('Computer Won');
-  } else if (total(playerHand) === total(computerHand)) {
+  } else if (playerTotal === computerTotal) {
     prompt('It is a tie!');
   }
 }
@@ -107,25 +109,39 @@ function playAgain() {
     again = readline.question().toLowerCase().trim();
   }
 }
+
+function dealOneCard(playerOrComputer) {
+  playerOrComputer.push(deck.splice(randomIndex(), 1).flat());
+}
+
+
 while (true) {
-  deck = initializeDeck();
-  shuffle(deck);
-  deal(deck);
   while (true) {
-    if (total(playerHand) === 21) {
-      prompt('Congratulations Player, you got 21');
+    if (total(playerHand) === TARGETTOTAL) {
+      prompt(`Congratulations Player, you got ${TARGETTOTAL}`);
+      break;
     }
-    if (total(playerHand) === 21) break;
     prompt('hit or stay?');
     let answer = readline.question();
-    if (answer === 'hit') {
-      playerHand.push(deck.splice(deck[randomCard(deck.length)], 1).flat());
-    }
-    console.log(playerHand);
     if (answer === 'stay' || busted(playerHand)) break;
+    if (answer === 'hit') dealOneCard(playerHand);
+    console.log(playerHand);
   }
-  while (!busted(playerHand) && total(computerHand) < 17) {
-    computerHand.push(deck.splice(deck[randomCard(deck.length)], 1).flat());
+
+  if (busted(playerHand)) {
+    prompt(`Sorry you busted with a total of ${playerTotal}, Computer Wins!`);
+    playAgain();
+    if (again === 'n') break;
+  }
+
+  while (total(computerHand) < MINVALUE) {
+    dealOneCard(computerHand);
+  }
+
+  if (busted(playerHand)) {
+    prompt(`Computer busted with a total of ${computerTotal}, Player Wins!`);
+    playAgain();
+    if (again === 'n') break;
   }
   console.log(computerHand);
   determineWinner();
@@ -135,8 +151,3 @@ while (true) {
 
 prompt(`Thank you for playing Twenty one!`);
 
-// let gameDeck = initialize(DECK)
-// const PlayerHand = [DECK[Math.floor(Math.random() * 13)], DECK[Math.floor(Math.random() * 13)]];
-// const ComputerHand = [DECK[Math.floor(Math.random() * 13)], DECK[Math.floor(Math.random() * 13)]];
-// console.log(PlayerHand);
-// console.log(ComputerHand);
