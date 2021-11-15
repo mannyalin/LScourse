@@ -124,10 +124,13 @@ while (true) {
     prompt('hit or stay?');
     let answer = readline.question();
     if (answer === 'stay' || busted(playerHand)) break;
-    if (answer === 'hit') dealOneCard(playerHand);
+    if (answer === 'hit') {
+      dealOneCard(playerHand);
+    }
     console.log(playerHand);
+    if (busted(playerHand)) break;
   }
-
+  playerTotal = total(playerHand);
   if (busted(playerHand)) {
     prompt(`Sorry you busted with a total of ${playerTotal}, Computer Wins!`);
     playAgain();
@@ -137,8 +140,8 @@ while (true) {
   while (total(computerHand) < MINVALUE) {
     dealOneCard(computerHand);
   }
-
   if (busted(playerHand)) {
+    computerTotal = total(computerTotal);
     prompt(`Computer busted with a total of ${computerTotal}, Player Wins!`);
     playAgain();
     if (again === 'n') break;

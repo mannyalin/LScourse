@@ -66,7 +66,7 @@ console.log(pairedNums([22, 33, 24, 26, 31, 35, 20, 27]));  // ==> [ [ 20, 22 ],
 function pairedNums(arr) {
   let resultArray = [];
   arr.sort().forEach(num => {
-    for(let idx = 0; idx < arr.length; idx += 1) {
+    for (let idx = 0; idx < arr.length; idx += 1) {
       if ((num - arr[idx] === 2) && !resultArray.flat().includes(arr[idx]) && !resultArray.flat().includes(num)) {
         resultArray.push([num, arr[idx]]);
       }
@@ -109,3 +109,25 @@ function pairedNums(arr) {
 // console.log(odds);
 
 
+function pairedNums(array) {
+  let arrayCopy = array.slice();
+  arrayCopy.sort();
+  let finishedArray = [];
+
+  while (arrayCopy.length !== 1)  {
+    
+    if (arrayCopy[1] - arrayCopy[0] === 2) {
+      finishedArray.push([arrayCopy[0], arrayCopy[1]])
+      arrayCopy.slice(2);
+     
+    } else if (arrayCopy[2] - arrayCopy[0] === 2) {
+      finishedArray.push([arrayCopy[0], arrayCopy[2]])
+      arrayCopy.shift();
+      arrayCopy.splice(1, 1);
+    } else {
+      arrayCopy.shift()
+    }
+  }
+
+    return finishedArray;
+}
