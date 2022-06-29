@@ -131,3 +131,54 @@ function pairedNums(array) {
 
     return finishedArray;
 }
+
+- filter: iterates through the calling the array
+          invokes the callback
+          returns true or false
+
+          performs selection
+  
+- map:    performs transformation
+          iterates -> invokes callback -> 
+          uses the callback's return value to populate the new array
+
+- forEach: iterates through array ->
+           invokes the callback ->
+           performs an action on each element based on the callback's body
+
+
+
+           1.  Problem Description
+           You are going to be given an array of integers. Your job is to take that array and find an index N where the sum of the integers to the left of N is equal to the sum of the integers to the right of N. If there is no index that would make this happen, return -1.
+           
+           For example:
+           Let's say you are given the array [1, 2, 3, 4, 3, 2, 1]:
+           Your function will return the index 3, because at the 3rd position of the array,
+           the sum of left side of the index [1, 2, 3] and the sum of the right side of the index [3, 2, 1] both equal 6.
+           
+           Another one:
+           You are given the array [20, 10, -80, 10, 10, 15, 35]
+           At index 0 the left side is []
+           The right side is [10, -80, 10, 10, 15, 35]
+           They both are equal to 0 when added. (Empty arrays are equal to 0 in this problem)
+           Index 0 is the place where the left side and right side are equal.
+           
+           # PEDAC => process the problem (PEDA) and code with intent (C)
+           
+           PROBLEM
+           - input: array of integers
+           - output: number representing index if true
+           
+           Identify rules
+           - if no index where sum of the integers on either side of N are equal, return -1
+           - empty arrays are equal to 0
+           - numbers can be negative
+           
+           EXAMPLES / TEST CASES
+           [1, 2, 3, 4, 3, 2, 1] => index position 3 because sum of numbers on both sides equal; in this case 6 and 6
+           
+           
+
+
+
+           
