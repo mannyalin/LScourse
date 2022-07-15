@@ -1,8 +1,10 @@
 /*
-Two input: first is a word and the second is an array of words that are possibly anagrams of the first word. 
+Two input: first is a word and the second is an array of words.
+Secone array are possibly anagrams of the first word.
 
 An anagram will have the same length and same exact letters.
-Will not need to check if it repeats because if same amount of letters, it will need to have the same exact letters or else it will have more characters?
+check if it repeats because if same amount of letters, it will
+need to have the same exact letters or else it will have more characters?
 
 Will also need to eliminate equal words.
 
@@ -17,12 +19,12 @@ Create a method named 'match'
 - filter through `possibleAnagrams`
   - if isSameLength
   - if not isSameWord
-  - and if sortedEqual 
+  - and if sortedEqual.
 */
 
 class Anagram {
-  constructor(word, checkAnagrams) {
-      this.word = word;
+  constructor(word) {
+    this.word = word;
   }
 
   isSameLength(currentWord) {
@@ -40,9 +42,11 @@ class Anagram {
   }
 
   match(possibleAnagrams) {
-   return possibleAnagrams.filter(currentWord => {
-      return this.isSameLength(currentWord) && this.isNotSameWord(currentWord) && this.sortedEqual(currentWord)
-    }) 
+    return possibleAnagrams.filter(currentWord => {
+      return this.isSameLength(currentWord) &&
+             this.isNotSameWord(currentWord) &&
+             this.sortedEqual(currentWord);
+    });
   }
 }
 

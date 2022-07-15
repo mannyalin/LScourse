@@ -40,5 +40,3 @@ class Series {
 
 module.exports = Series;
 
-let series = new Series('01234');
-console.log(series.slices(1))

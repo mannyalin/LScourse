@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /*
 Write a program that generates the lyrics of the song  `99 Bottles of Beer`
 
@@ -16,13 +17,13 @@ verse takes a number as an argument. The number is the starting amount of beer a
                    "bottles of beer.\nGo to the store and buy some " +
                    "more, 99 bottles of beer on the wall.\n";
 
-verses: 
+verses:
 takes 2 arguments, calls verse through the range of arguments inclusive.
 
 
 lyrics:  calls verse from [99 - 0];
 
-Algo: 
+Algo:
 
 create class `BeerSong` and create static method verse.
 verse takes `numBeer`, a number input, as an argument.
@@ -40,18 +41,18 @@ if `numBeer` === 0 :"No more bottles of beer on the wall, no more " +
 
 class BeerSong {
   static verse(numBeer) {
-    if(numBeer > 2) {
+    if (numBeer > 2) {
       return numBeer + " bottles of beer on the wall, " + numBeer + " bottles of beer.\n" +
       "Take one down and pass it around, " + (numBeer - 1) + " bottles of beer " +
       "on the wall.\n";
     } else if (numBeer === 2) {
       return "2 bottles of beer on the wall, 2 bottles of beer.\n" +
       "Take one down and pass it around, 1 bottle of beer " +
-      "on the wall.\n"
+      "on the wall.\n";
     } else if (numBeer === 1) {
       return "1 bottle of beer on the wall, 1 bottle of beer.\n" +
       "Take it down and pass it around, no more bottles " +
-      "of beer on the wall.\n"
+      "of beer on the wall.\n";
     } else {
       return "No more bottles of beer on the wall, no more " +
       "bottles of beer.\nGo to the store and buy some " +
@@ -60,7 +61,7 @@ class BeerSong {
   }
 
   static verses(beerStart, beerEnd) {
-    let song = []
+    let song = [];
     for (let numBeer = beerStart; numBeer >= beerEnd; numBeer--) {
       song.push(this.verse(numBeer));
     }
@@ -74,7 +75,7 @@ class BeerSong {
       song.push(this.verse(numBeer));
     }
 
-    return song.join('\n')
+    return song.join('\n');
   }
 
 }
