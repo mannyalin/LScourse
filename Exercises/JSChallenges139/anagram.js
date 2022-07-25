@@ -1,6 +1,6 @@
 /*
 Two input: first is a word and the second is an array of words.
-Secone array are possibly anagrams of the first word.
+Second array are possibly anagrams of the first word.
 
 An anagram will have the same length and same exact letters.
 check if it repeats because if same amount of letters, it will
@@ -27,9 +27,9 @@ class Anagram {
     this.word = word;
   }
 
-  isSameLength(currentWord) {
-    return currentWord.length === this.word.length;
-  }
+  // isSameLength(currentWord) {
+  //   return currentWord.length === this.word.length;
+  // }
 
   isNotSameWord(currentWord) {
     return currentWord.toLowerCase() !== this.word.toLowerCase();
@@ -43,8 +43,7 @@ class Anagram {
 
   match(possibleAnagrams) {
     return possibleAnagrams.filter(currentWord => {
-      return this.isSameLength(currentWord) &&
-             this.isNotSameWord(currentWord) &&
+      return this.isNotSameWord(currentWord) &&
              this.sortedEqual(currentWord);
     });
   }
