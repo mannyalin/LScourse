@@ -1,3 +1,6 @@
+"use strict";
+// This solution attempt used an object factory with a closure to make the `items` collection private. It allowed us to have an obejct that had methods to create a private `items` list and modify and get information for it. However for the assignment, it would not allow me to get to the `reports manager` section because the `init` method is suppose to assign the created object to the `items` property. The program right now only has an items variable that holds an array in its closure. Attempting again at the end of this first attempt.  
+
 function createManager() {
   let items = [];
 
@@ -16,7 +19,6 @@ function createManager() {
     update(sku, obj) {
       items.forEach(item => {
         if(item['SKU'] === sku) {
-          console.log("in")
           return item[Object.keys(obj)] = Number(Object.values(obj));
         }
       })
@@ -42,16 +44,18 @@ function createManager() {
   }
 }
 
-ItemManager = createManager();
+let ItemManager = createManager();
 
 ItemManager.create('asd', 'sports', 0);
 ItemManager.create("basketball", "sports", 1);
 ItemManager.create('soccer ball', 'sports', 5);
 ItemManager.create('racketball', 'sports', 0);
 ItemManager.create('kitchen pot', 'cooking', 3);
-// ItemManager.update('bassp', { quantity : 3 })
-// ItemManager.delete('bassp')
-// console.log(ItemManager.items());
-// console.log(ItemManager.inStock());
-// console.log(ItemManager.itemsInCatergory('cooking'))
+ItemManager.update('bassp', { quantity : 3 })
+ItemManager.delete('bassp')
+console.log(ItemManager.items());
+console.log(ItemManager.inStock());
+console.log(ItemManager.itemsInCatergory('cooking'))
 console.log(ItemManager)
+
+//

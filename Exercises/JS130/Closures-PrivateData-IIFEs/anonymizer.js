@@ -207,3 +207,4 @@ let displayName = fooBar.displayName;
 console.log(fooBar.reanonymize('abc'));                         // returns true
 
 console.log(displayName === fooBar.displayName);   // logs false
+console.log(fooBar);
