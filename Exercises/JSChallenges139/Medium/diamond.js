@@ -37,19 +37,46 @@ create a class `Diamond` with a static method `makeDiamond` that takes one lette
 
 -Take the letter and use that to create the letters that we will use (ex: argument 'C' , letters will be A, B ,C . make a list or letters using array)
 -iterate through the letter list 
- - for each letter create how much padding and space it needs, and concatenate '\n'  (create helper functions)
+ - for each letter create how much padding and space it needs, and concatenate '\n'(can do it when using `join` method)  (create helper functions)
     
     - then push what has been created to a collection of these letters with their spaces and '\n' (' B B \n')
 - reverse iteration but without the widest width letter and repeat procedure
 - convert array to string and return the string value. 
 
 helper functions:
-to create how much padding on each side
- - 
-
-to create how much space in between
+static maxLetterIdx = alphabet.indexOf(maxLetter) + 1
+static currLetterIdx = alphabet.indexOf(letter) + 1
 
 to figure out how many characters max width
+- 2 * letterParameterPosition - 1
+maxWidth(letter) {
+  let alphaPosition = this.alphabet.indexOf(letter) + 1;
+  let max = (2 * alphaPosition) - 1; 
+}
+
+to create how much padding on each side
+ - ((2 * maxLetter) - 1) - (2 * currentLetter - 1)) / 2
+addPad(maxLetter, letter) {
+  let padSpace = ((this.maxLetterIdx - 1) - (2 * this.currentLetterIdx - 1 )/ 2
+  let pad = ' '.repeat(padSpace)
+  return pad
+}
+  let pad = ' '.repeat(maxWidth - (2 * this.alphabet.indexOf(letter)))/ 2
+  return pad + fromMakeRow + pad
+
+} 
+
+to create how much space in between
+ - (2 * currentLetterPosition) - 3
+addBetween(letter) {
+if(letter === 'A') return  'A'
+
+  let midspace = ' '.repeat((2 * this.currLetterIdx - 3)
+  return letter + midspace + letter;
+}
+
+
+addPad(maxLetter, letter) +  addbetween(letter)  + addPad(maxLetter, letter)
 
 
 
@@ -58,27 +85,47 @@ to figure out how many characters max width
 class Diamond {
   static alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-  static lettersRange() {
+  static lettersRange(letter) {
     let range = [];
 
-    for (let i = 0; i <= this.alphabet.indexOf(letter.toUpperCase()); i++) {
+    for (let i = 0; i <= this.alphabet.indexOf(letter); i++) {
       range.push(this.alphabet[i]);
     }
-      range = [...lettersRange, ...lettersRange.reverse().slice(1)]
+      range = [...range, ...range.reverse().slice(1)]
     
     return range;
   }
 
+  static addPad(maxLetter, letter) {
+    let maxLetterIdx = this.alphabet.indexOf(maxLetter) + 1;
+    let currLetterIdx = this.alphabet.indexOf(letter) + 1;
+    let padSpace = (((2* maxLetterIdx) - 1) - ((2 * currLetterIdx) - 1))/ 2;
+    let pad = ' '.repeat(padSpace)
+    return pad
+  }
 
+  static addSpaceBtwn(letter) {
+    if(letter === 'A') return 'A';
 
-  static makediamond(letter) {
+    let currLetterIdx = this.alphabet.indexOf(letter) + 1;
+    let space = ' '.repeat((2 * currLetterIdx) - 3);
+    return letter + space + letter;
+  }
+
+  static makeDiamond(maxLetter) {
+    // if (maxLetter === 'A') return 'A\n';
     
-    range = this.lettersRange();
-
+    let diamond = [];
+    let range = this.lettersRange(maxLetter);
     range.forEach(letter => {
-      
+      diamond.push(this.addPad(maxLetter,letter) + this.addSpaceBtwn(letter) + this.addPad(maxLetter, letter));
     })
+    diamond = diamond.join('\n')
+    console.log(diamond)
+    return `${diamond}\n`;
   }
 }
 
-Diamond.makediamond('c');
+Diamond.makeDiamond('C');
+
+module.exports = Diamond;
