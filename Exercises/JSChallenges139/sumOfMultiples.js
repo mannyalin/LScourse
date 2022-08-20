@@ -24,33 +24,30 @@ use reduce to return sum of all multiples.
 
 class sumOfAllMultiples {
   constructor(...args) {
-    if(args === '[]') {
+    if(args.length === 0) {
       this.multiples = [3,5]
     } else {
       this.multiples = args;
     }
   }
 
-  static to(target) {
-    let multiples = [3,5]
-    if (multiples.every(num => num > target)) return 0;
+  // static to(target) {
+  //   let multiples = [3,5]
+  //   if (multiples.every(num => num > target)) return 0;
 
-    multiples.forEach(num => {
-      let orginalNum = num
-      let mult = num
-      while(mult < target) {
-        if(!(multiples.includes(mult))) {
-          multiples.push(mult);
-        }
-        console.log(`mult ${mult}`)
-        console.log(`target ${target}`)
-        console.log(multiples)
-        mult += orginalNum;
-      }
-    }) 
+  //   multiples.forEach(num => {
+  //     let orginalNum = num
+  //     let mult = num
+  //     while(mult < target) {
+  //       if(!(multiples.includes(mult))) {
+  //         multiples.push(mult);
+  //       }
+  //       mult += orginalNum;
+  //     }
+  //   }) 
 
-    return multiples.filter(num => num < target).reduce((acc, cur) => acc + cur, 0)
-  }
+  //   return multiples.filter(num => num < target).reduce((acc, cur) => acc + cur, 0)
+  // }
   
   to(target) {
     if (this.multiples.every(num => num > target)) return 0;
@@ -61,20 +58,23 @@ class sumOfAllMultiples {
       while(mult < target) {
         if(!(this.multiples.includes(mult))) {
           this.multiples.push(mult);
+
+          console.log(`mult ${mult}`);
+          console.log(`multiples ${this.multiples}`)
         }
-        console.log(`mult ${mult}`)
-        console.log(`target ${target}`)
-        console.log(this.multiples)
+        
+        
         mult += orginalNum;
       }
     }) 
 
-    return this.multiples.reduce((acc, curr) => {
-      if (curr < target) {
-        return acc + curr;
-      }
-    }, 0) 
+    return this.multiples.filter(num => num < target).reduce((acc, mult) => acc +mult, 0)
+
   }
+
+  static to(target) {
+    return new sumOfAllMultiples().to(target);
+  } 
 }
 
 console.log(sumOfAllMultiples.to(4))

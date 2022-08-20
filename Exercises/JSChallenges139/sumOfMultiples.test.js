@@ -22,8 +22,8 @@ describe("sum of multiples", () => {
   });
 
   test("configurable 7 13 17 to 20", () => {
-    let obj = new SumOfMultiples(7, 13, 17);
-    expect(obj.to(20)).toEqual(51);
+    let obj = new SumOfMultiples();
+    expect(obj.to(10)).toEqual(23);
   });
 
   test("configurable 4 6 to 15", () => {
